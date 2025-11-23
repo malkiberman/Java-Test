@@ -1,7 +1,9 @@
 package Models;
 
 public class Task {
-    private int id;
+    private  int id = 0;
+    private static int numOftasks = 0;
+
     private String title;
     private String description;
     private TaskStatus status;
@@ -9,8 +11,9 @@ public class Task {
     public Task() {
     }
 
-    public Task(int id, String title, String description, TaskStatus status) {
-        this.id = id;
+    public Task( String title, String description, TaskStatus status) {
+        numOftasks ++;
+        this.id= numOftasks;
         this.title = title;
         this.description = description;
         this.status = status;
@@ -47,5 +50,15 @@ public class Task {
 
     public void setStatus(TaskStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id = " + id+
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                '}';
     }
 }

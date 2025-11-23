@@ -70,7 +70,7 @@ public class TaskRepository {
         TaskStatus status = TaskStatus.valueOf(keys[3].split(":")[1].replace("\"", "").trim());
 
 
-        return new Task(id, title, desc, status);
+        return new Task( title, desc, status);
     }
 
     private void save() {
@@ -84,7 +84,7 @@ public class TaskRepository {
                 writer.println("  \"description\": \"" + task.getDescription() + "\",");
                 writer.println("  \"status\": \"" + task.getStatus() + "\"");
                 writer.println("}");
-                if (count++ < tasksMap.size())
+                if (++count < tasksMap.size())
                     writer.println(",");
             }
 
