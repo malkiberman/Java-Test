@@ -15,7 +15,7 @@ user/{id}/ - קבלת משתמש לפי id - get
 
 
  מבנים
-יהיה מבנה עבור ספר:
+ מבנה עבור ספר:
 public class BookDTO {
     private int id;
     private String title;
@@ -46,27 +46,32 @@ public class LoanDTO {
     private LocalDate returnDate;
 }
 
-bookId userId שדות חובה  id בד"כ נרשם עי המערכת...
+bookId userId שדות חובה
+id בד"כ נרשם עי המערכת...
 
-
+-----------------------------------------------------------
 
 3
+
 מחלקות למערכת הזמנות ותשלומים
+
 Order - id, orderItems, customerId, allPrice
 אחראית על ניהול כל ההזמנות חישוב מחיר לקניה משייכת קינה ללקוח
+
 OrderItem - id, name, qlt
 מיצגת פריט מכלל הפריטים.
+
 Payment - id, orderId, status
 מיצגת תשלום להזמנה מסוימת והאם בוצע מסמנת תשלום שבוצע
+
 Customer - id, name, phone
 לייצג את הלקוחות.
 
+*
 וידוא שתשלום אכן שייך להזמנה הנכונה
 קישור דרך orderId
-
-כל Payment מכיל orderId שמצביע על Order קיים במערכת.
-
-לפני יצירת תשלום או עדכונו, בודקים שה־orderId קיים ושסטטוס ההזמנה מאפשר תשלום.
+כל תשלום מכיל מס הזמנה שמצביע על הזמנה קיימת במערכת.
+לפני יצירת תשלום או עדכונו, בודקים שהמס הזמנה קיים ושסטטוס ההזמנה מאפשר תשלום.
 משו כמו זה :
 if(!orders(payment.getOrderId())) {
     throw new Exception("Order not exist!");
