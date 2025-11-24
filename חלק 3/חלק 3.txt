@@ -1,0 +1,77 @@
+1
+ יהיו כמה endpoints הכרחיים (כמובן שתמיד אפשר להוסיף לפי התאמה)
+
+פעולות מתאימות לכל endpoint
+ספרים
+
+/books - קבלת כל הספרים- get  וכן הוספת ספר - post
+/books/{id} - קבלת ספר לפי ID get , עדכון ספר - put מחיקת ספר delete
+/פונקציה להשאלת ספר/books/{id}/  - השאלת ספר לדוג (/books/{id}/borrow)
+/פונקציה להחזרת ספר/books/{id}/ - החזרת ספר לדוג(/books/{id}/return)
+
+משתמשים
+users/ - קבלת כל המשתמשים - get
+user/{id}/ - קבלת משתמש לפי id - get
+
+
+ מבנים
+יהיה מבנה עבור ספר:
+public class BookDTO {
+    private int id;
+    private String title;
+    private String author;
+    private int year;
+    private boolean available;
+}
+
+id, title, auther הם שדות חובה
+ (אולי available גם או שמאותחל false by default )  וכן id בד"כ נרשם עי המערכת...
+
+מבנה עבור משתמש
+public class UserDTO {
+    private int id;
+    private String name;
+    private String email;
+}
+
+כשכל השדות הם חובה.  (id בד"כ נרשם עי המערכת...)
+
+יהיה גם מבנה עבור השאלות
+
+public class LoanDTO {
+    private int id;
+    private int bookId;
+    private int userId;
+    private LocalDate loanDate;
+    private LocalDate returnDate;
+}
+
+bookId userId שדות חובה  id בד"כ נרשם עי המערכת...
+
+
+
+3
+מחלקות למערכת הזמנות ותשלומים
+Order - id, orderItems, customerId, allPrice
+אחראית על ניהול כל ההזמנות חישוב מחיר לקניה משייכת קינה ללקוח
+OrderItem - id, name, qlt
+מיצגת פריט מכלל הפריטים.
+Payment - id, orderId, status
+מיצגת תשלום להזמנה מסוימת והאם בוצע מסמנת תשלום שבוצע
+Customer - id, name, phone
+לייצג את הלקוחות.
+
+וידוא שתשלום אכן שייך להזמנה הנכונה
+קישור דרך orderId
+
+כל Payment מכיל orderId שמצביע על Order קיים במערכת.
+
+לפני יצירת תשלום או עדכונו, בודקים שה־orderId קיים ושסטטוס ההזמנה מאפשר תשלום.
+משו כמו זה :
+if(!orders(payment.getOrderId())) {
+    throw new Exception("Order not exist!");
+}
+
+חייב להיות שאכן זו ההזמנה
+כי כל תשלום משויך להזמנה אחת ואם ההזמנה אכן קיימת והתשלום עדיין לא בוצע ע"פ הסטטוס
+אז התשלום ודאי משויך להזמנה
