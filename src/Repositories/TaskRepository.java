@@ -14,6 +14,7 @@ public class TaskRepository {
     public TaskRepository(String filePath) {
         this.filePath = filePath;
         tasksMap = new HashMap<>();
+        loudFromFile();
     }
 
     public TaskRepository() {
@@ -60,11 +61,10 @@ public class TaskRepository {
 
     private Task parseToTask(String obj) {
 
-        obj = obj.trim().substring(0, obj.length() - 1);
+        obj = obj.trim().substring(1, obj.length() - 1);
 
         String[] keys = obj.split(",");
 
-        int id = Integer.parseInt(keys[0].split(":")[1].replace("\"", "").trim());
         String title = keys[1].split(":")[1].replace("\"", "").trim();
         String desc = keys[2].split(":")[1].replace("\"", "").trim();
         TaskStatus status = TaskStatus.valueOf(keys[3].split(":")[1].replace("\"", "").trim());
