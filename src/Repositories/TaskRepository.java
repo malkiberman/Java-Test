@@ -70,7 +70,7 @@ public class TaskRepository {
         TaskStatus status = TaskStatus.valueOf(keys[3].split(":")[1].replace("\"", "").trim());
 
 
-        return new Task( title, desc, status);
+        return new Task(title, desc, status);
     }
 
     private void save() {

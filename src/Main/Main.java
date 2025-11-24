@@ -12,6 +12,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        int[] arr = {1, 2, 3, 1, 2};
+
         TaskRepository taskRepository = new TaskRepository();
         TaskService taskService = new TaskService(taskRepository);
 
@@ -39,7 +41,7 @@ public class Main {
                     System.out.print("Enter description: ");
                     String description = scanner.nextLine();
 
-                    taskRepository.add(new Task(title,description,TaskStatus.NEW));
+                    taskRepository.add(new Task(title, description, TaskStatus.NEW));
 
                     break;
 
@@ -54,7 +56,7 @@ public class Main {
                     System.out.print("Enter new description: ");
                     String newDescription = scanner.nextLine();
 
-                    taskRepository.add(new Task(newTitle,newDescription,TaskStatus.NEW));
+                    taskRepository.add(new Task(newTitle, newDescription, TaskStatus.NEW));
                     break;
 
                 case 3:
@@ -70,7 +72,7 @@ public class Main {
                     System.out.print("Enter id to mark as DONE: ");
                     int doneId = Integer.parseInt(scanner.nextLine());
 
-                      taskService.done(doneId);
+                    taskService.done(doneId);
                     break;
 
                 case 5:
